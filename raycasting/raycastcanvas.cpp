@@ -1133,14 +1133,16 @@ void RayCastCanvas::draw_traces(){
         if(trace.empty()) continue;
         cv::Vec3b cur_cl = colormap4tracking_res->at<cv::Vec3b>(tr);
         QColor c(cur_cl(0), cur_cl(1), cur_cl(2));
+        QColor c2(255, 255, 255);
         //QColor c = QColor(255,0,0);
         //painter.setPen(QPen(c, 3));
         //        qDebug() << c;
         if(trace.size() > 1 || (trace.size()==1 && curr_timePoint_in_canvas==0)){
             QVector3D trace_head = volume_pixel_pos_to_view_pos(trace[0]);
             trace_head = m_modelViewProjectionMatrix * trace_head;
-            this->drawPoint(&painter, c, QPointF(trace_head.x(), trace_head.y()), line_width+1);
+            this->drawPoint(&painter, c2, QPointF(trace_head.x(), trace_head.y()), line_width+2);
         }
+        //qDebug()<< trace.size();
         for(int i=1; i<trace.size(); i++){
             QVector3D start_p = volume_pixel_pos_to_view_pos(trace[i-1]);
             QVector3D end_p = volume_pixel_pos_to_view_pos(trace[i]);
@@ -1155,7 +1157,12 @@ void RayCastCanvas::draw_traces(){
             this->drawLine(&painter, c, QPointF(p_start.x(), p_start.y()), QPointF(p_end.x(), p_end.y()), line_width);
             //painter.drawLine(QPointF(p_start.x(), p_start.y()), QPointF(p_end.x(), p_end.y()));            //flag = true;
             //break;
-            this->drawPoint(&painter, c, QPointF(p_end.x(), p_end.y()), line_width+1);
+            if(i==trace.size()-1){
+                this->drawPoint(&painter, c2, QPointF(p_end.x(), p_end.y()), line_width+2);
+            } else {
+                this->drawPoint(&painter, c, QPointF(p_end.x(), p_end.y()), line_width);
+            }
+
         }
         //if(flag) break;
     }

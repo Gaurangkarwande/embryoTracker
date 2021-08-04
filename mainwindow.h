@@ -56,6 +56,7 @@ public:
     QMenu *processMenu;
     QAction *segmentCell3d;
     QAction *trackCell3d;
+    QAction *segmentOPC;
     // control widgets on the right size
     //QGridLayout *rightSideControlLayout;
     QScrollBar *contrastScrollBar, *thresholdScrollBar;

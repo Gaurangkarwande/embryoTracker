@@ -60,8 +60,10 @@ void MainWindow::createControlWidgets()
     menuBar->addMenu(processMenu);
     segmentCell3d = new QAction(tr("&Cell Segmentation"), this);
     trackCell3d = new QAction(tr("&Cell Tracking"), this);
+    segmentOPC = new QAction(tr("&OPC Segmentation"), this);
     processMenu->addAction(segmentCell3d);
     processMenu->addAction(trackCell3d);
+    processMenu->addAction(segmentOPC);
 /** *************** Debug algorithms *****************/
     debugButton = new QAction(tr("Debug"), this);
     //menuBar->addAction(debugButton);
@@ -284,6 +286,9 @@ void MainWindow::connectSignal()
     if (debugButton){
         connect(debugButton, SIGNAL(triggered()), this, SLOT(debugAlgorithm()));
     }
+    if (segmentOPC){
+        connect(segmentCell3d, SIGNAL(triggered()), this, SLOT(sendData4Segment()));
+    }
 
     /** annotation from glWidget_raycast to update the */
 
@@ -416,7 +421,7 @@ void MainWindow::sendData4Segment()
                                             glWidget_raycast->bufSize);
     }
     /// way 1: directly detect cells on the original data
-    //cellSegmenter->processSingleFrameAndReturn(glWidget_raycast);
+    //cellSegmenter->processSingleFrameAndReturn(glWidget_raycast->curr_timePoint_in_canvas);
     /// way 2: try to load saved data. Detect cells if failed.
     cellSegmenter->processSingleFrameAndReturn(glWidget_raycast->curr_timePoint_in_canvas,
                    data4test->filelist.at(glWidget_raycast->curr_timePoint_in_canvas), seg4track);

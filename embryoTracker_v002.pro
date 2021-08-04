@@ -10,12 +10,12 @@ CONFIG += c++17
 #DEFINES += USE_Qt5 # for vaa3d functions
 
 SOURCES += data_importer.cpp \
+    celltracking/CINDA/src_c/cinda_funcs.c \
     cellsegmentation/cellsegment_main.cpp \
     cellsegmentation/img_basic_proc.cpp \
     cellsegmentation/maxflow_bk/graph.cpp \
     cellsegmentation/maxflow_bk/maxflow.cpp \
     cellsegmentation/synquant_simple.cpp \
-    celltracking/CINDA/src_c/cinda_funcs.c \
     celltracking/celltracking_main.cpp \
     main.cpp \
     mainwindow.cpp \

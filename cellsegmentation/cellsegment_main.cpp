@@ -245,6 +245,7 @@ void cellSegmentMain::processSingleFrameAndReturn(int curr_timePoint_in_canvas, 
     ///
     unsigned char *ind = (unsigned char*)normalized_data4d.data + sz_single_frame*curr_time_point; // sub-matrix pointer
     Mat *single_frame = new Mat(3, normalized_data4d.size, CV_8U, ind);
+    qDebug()<<normalized_data4d.size;
     if(!time_points_processed[curr_time_point]){
         cell_label_maps[curr_time_point] = Mat::zeros(3, normalized_data4d.size, CV_32S); // int label
         threshold_maps[curr_time_point] = Mat::zeros(3, normalized_data4d.size, CV_8U);
@@ -299,7 +300,7 @@ void cellSegmentMain::cellSegmentSingleFrame(Mat *data_grayim3d, size_t curr_fra
     }
     float stb_var = calVarianceStablization(stblizedVol, stblizedVarMaps[curr_frame], stblizedVarTrends[curr_frame],
                                                        p4odStats.varAtRatio, p4odStats.gap4varTrendEst);
-    //ccShowSlice3Dmat(&stblizedVarMaps[curr_frame], CV_32F, 3);
+    ccShowSlice3Dmat(&stblizedVarMaps[curr_frame], CV_32F, 3);
 
     //////////////////////////////////////////////////////////////////
     //           1. use synQuant to get 1-tier seed regions         //

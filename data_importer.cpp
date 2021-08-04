@@ -67,7 +67,7 @@ bool DataImporter::importGeneralImgSeries(const QStringList & mylist, TimePackTy
         QString tmpfileInfo = mylist.at(i);
         printf("importing %i file: {%s}\n", i, qPrintable(tmpfileInfo));
 
-        unsigned char * cur_data1d=0;
+        unsigned char * cur_data1d= nullptr;
         V3DLONG * cur_sz=0;
         if (!readSingleImageFile(tmpfileInfo.toUtf8().data(), cur_data1d, cur_sz, cur_datatype))
         {

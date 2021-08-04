@@ -200,8 +200,8 @@ void synQuantSimple::componentTree3d(segParameter p4segVol, odStatsParameter p4o
     fill(areasN.begin(), areasN.end(), 0);
 
     voxSum.resize(nVoxels);
+    cout << "nVoxels";
     BxCor.resize(nVoxels);//ymin,xmin,zmin,  ymax,xmax,zmax.
-
     for (i=0; i<nVoxels; i++)
     {
         rmder = i % nPixels;
